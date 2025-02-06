@@ -31,11 +31,14 @@ public class GeneroService {
      public boolean salvarOuAtualizar(GeneroDTO generoDTO) {
         Mono<GeneroDTO> obj = this.webClient
             .method(HttpMethod.POST)  
-            .uri("genero")
+            .uri("genero") // Ajuste a URL de acordo com a sua configuração
             .bodyValue(generoDTO)
             .retrieve()
             .bodyToMono(GeneroDTO.class);
-        
-        return obj.block() != null;
+    
+        GeneroDTO savedGenero = obj.block(); // bloqueia até a resposta chegar
+    
+        // Verifica se o gênero foi realmente salvo
+        return savedGenero != null;
     }
 }
