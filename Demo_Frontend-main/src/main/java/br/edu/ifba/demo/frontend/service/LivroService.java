@@ -44,7 +44,7 @@ public class LivroService {
     public boolean salvarOuAtualizar(LivroDTO livroDTO){
         Mono<LivroDTO> obj = this.webClient
             .method(HttpMethod.POST)  
-            .uri("livro", livroDTO)
+            .uri("livro")
             // .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .bodyValue(livroDTO)
             .retrieve()

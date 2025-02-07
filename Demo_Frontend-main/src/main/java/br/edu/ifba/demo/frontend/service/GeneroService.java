@@ -11,34 +11,65 @@ import br.edu.ifba.demo.frontend.dto.GeneroDTO;
 import reactor.core.publisher.Mono;
 
 @Service
-
 public class GeneroService {
     @Autowired
     private WebClient webClient;
 
-    public List<GeneroDTO> listAllGeneros(){
+    // Método existente (listar todos)
+    public List<GeneroDTO> listAllGeneros() {
         Mono<List<GeneroDTO>> listObj = this.webClient
             .method(HttpMethod.GET)
             .uri("genero/listall")
             .retrieve()
             .bodyToFlux(GeneroDTO.class)
             .collectList();
-        
-        List<GeneroDTO> list = listObj.block();
-        return list;
+        return listObj.block();
     }
-     // Método para salvar ou atualizar um gênero
-     public boolean salvarOuAtualizar(GeneroDTO generoDTO) {
+
+    // Método existente (salvar)
+    public boolean salvarOuAtualizar(GeneroDTO generoDTO) {
         Mono<GeneroDTO> obj = this.webClient
             .method(HttpMethod.POST)  
-            .uri("genero") // Ajuste a URL de acordo com a sua configuração
+            .uri("genero")
             .bodyValue(generoDTO)
             .retrieve()
             .bodyToMono(GeneroDTO.class);
-    
-        GeneroDTO savedGenero = obj.block(); // bloqueia até a resposta chegar
-    
-        // Verifica se o gênero foi realmente salvo
-        return savedGenero != null;
+        return obj.block() != null;
+    }
+
+
+    // Buscar gênero por ID (para edição)
+    public GeneroDTO getById(Long id) {
+        return this.webClient
+            .method(HttpMethod.GET)
+            .uri("genero/{id}", id)
+            .retrieve()
+            .bodyToMono(GeneroDTO.class)
+            .block();
+    }
+
+    // Atualizar gênero (PUT)
+    public boolean atualizar(GeneroDTO generoDTO) {
+        return this.webClient
+            .method(HttpMethod.PUT)
+            .uri("genero/{id}", generoDTO.getId_genero())
+            .bodyValue(generoDTO)
+            .retrieve()
+            .toBodilessEntity()
+            .block()
+            .getStatusCode()
+            .is2xxSuccessful();
+    }
+
+    // Excluir gênero (DELETE)
+    public boolean delete(Long id) {
+        return this.webClient
+            .method(HttpMethod.DELETE)
+            .uri("genero/{id}", id)
+            .retrieve()
+            .toBodilessEntity()
+            .block()
+            .getStatusCode()
+            .is2xxSuccessful();
     }
 }

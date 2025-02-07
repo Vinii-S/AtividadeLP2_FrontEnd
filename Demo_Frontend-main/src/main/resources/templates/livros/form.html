@@ -44,15 +44,17 @@
 
         <div class="col-md-4">
             <label for="genero" class="form-label">Gênero:</label>
-            <div class="d-flex">
-                <select class="form-control me-2" id="genero" th:field="*{genero}">
-                    <option value="">Selecione um gênero</option>
-                    <!-- Itera sobre a lista de gêneros e cria uma opção para cada um -->
-                    <option th:each="g : ${genero}" th:value="${g.nome_genero}" th:text="${g.nome_genero}"></option>
-                </select>
-                <button type="button" class="btn btn-primary" id="addGeneroBtn">+</button>
-
-            </div>
+            <select class="form-control" id="genero" th:field="*{generoId}">
+                <option value="">Selecione um gênero</option>
+                <option 
+                    th:each="g : ${generos}" 
+                    th:value="${g.id_genero}" 
+                    th:text="${g.nome_genero}"
+                    th:selected="${livro.generoId} == ${g.id_genero}"
+                ></option>
+            </select>
+            <!-- Link para gerenciar gêneros -->
+        <a th:href="@{/genero/list}" class="btn btn-link">Gerenciar Gêneros</a>
         </div>
 
         <div class="col-md-4">

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gêneros Literários</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Gêneros Literários</h1>
+        <a th:href="@{/genero/novo}" class="btn btn-primary mb-3">
+            Cadastrar Novo Gênero
+        </a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="genero : ${generos}">
+                    <td th:text="${genero.nome_genero}"></td>
+                    <td th:text="${genero.status ? 'Ativo' : 'Inativo'}"></td>
+                    <td>
+                        <a th:href="@{/genero/editar/{id}(id=${genero.id_genero})}" 
+                           class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/genero/excluir/{id}(id=${genero.id_genero})}" 
+                           class="btn btn-danger btn-sm" 
+                           onclick="return confirm('Tem certeza?')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/livros/novo}" class="btn btn-secondary">Voltar</a>
+    </div>
+</body>
+</html>

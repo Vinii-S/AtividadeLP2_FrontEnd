@@ -50,13 +50,12 @@ public class LivroController {
     }
 
     @GetMapping("/novo")
-    public ModelAndView  novoLivro() {
+    public ModelAndView novoLivro() {
         ModelAndView mv = new ModelAndView("livros/form");
         mv.addObject("livro", new LivroDTO());
-        mv.addObject("genero", generoService.listAllGeneros());
+        mv.addObject("generos", generoService.listAllGeneros()); // Carrega gêneros
         return mv;
     }
-    
 
     @GetMapping("/view/{id}")
     public ModelAndView  exibirLivro(@PathVariable("id") Long id) {
@@ -64,14 +63,16 @@ public class LivroController {
         ModelAndView mv = new ModelAndView("livros/form");
         mv.addObject("livro", livro);
         mv.addObject("view", true);
+        mv.addObject("generos", generoService.listAllGeneros());
         return mv;
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView  editarLivro(@PathVariable("id") Long id) {
+    public ModelAndView editarLivro(@PathVariable Long id) {
         LivroDTO livro = livroService.getById(id);
         ModelAndView mv = new ModelAndView("livros/form");
         mv.addObject("livro", livro);
+        mv.addObject("generos", generoService.listAllGeneros()); // Carrega gêneros
         mv.addObject("view", false);
         return mv;
     }

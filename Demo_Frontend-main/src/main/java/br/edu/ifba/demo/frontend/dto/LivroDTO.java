@@ -10,12 +10,12 @@ import lombok.Data;
 @Data
 public class LivroDTO implements Serializable {
 	private Long id_livro;
-    private Long generoId;
 	private String titulo;
     private String autor;
     private String editora;
     private Integer ano_publicacao;
-    private String genero;
+    private Long generoId; 
+    private String generoNome;
     private Integer isbn;
     private Integer num_paginas;
     private String sinopse;
