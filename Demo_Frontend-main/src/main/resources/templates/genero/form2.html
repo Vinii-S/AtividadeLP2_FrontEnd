@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title th:text="${genero.id_genero} != null ? 'Editar Gênero' : 'Novo Gênero'">Gêneros Literários</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
+
 <body>
     <div class="container mt-4">
         <h1 th:text="${genero.id_genero} != null ? 'Editar Gênero' : 'Novo Gênero'"></h1>
-        <form th:action="${genero.id_genero} != null ? @{/genero/editar/{id}(id=${genero.id_genero})} : @{/genero}" method="post">
+        <form th:action="${genero.id_genero} != null ? @{/genero/editar/{id}(id=${genero.id_genero})} : @{/genero}"
+            method="post" th:object="${genero}">
             <input type="hidden" th:field="*{id_genero}" />
             <div class="mb-3">
                 <label for="nome_genero" class="form-label">Nome:</label>
@@ -24,6 +27,8 @@
             <button type="submit" class="btn btn-success">Salvar</button>
             <a th:href="@{/genero/list}" class="btn btn-secondary">Voltar</a>
         </form>
+
     </div>
 </body>
+
 </html>
