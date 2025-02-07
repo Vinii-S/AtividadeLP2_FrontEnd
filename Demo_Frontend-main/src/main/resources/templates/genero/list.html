@@ -33,7 +33,19 @@
                 </tr>
             </tbody>
         </table>
-        <a th:href="@{/livros/novo}" class="btn btn-secondary">Voltar</a>
+        <a href="#" class="btn btn-secondary" onclick="goBack()">Voltar</a>
+
     </div>
+    <script>
+        function goBack() {
+            
+            if (document.referrer && document.referrer !== window.location.href) {
+                window.location = document.referrer;
+            } else {
+        
+                window.location = '/livros/';  
+            }
+        }
+    </script>
 </body>
 </html>

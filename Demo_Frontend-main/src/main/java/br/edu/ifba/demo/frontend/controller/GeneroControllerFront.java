@@ -64,13 +64,33 @@ public class GeneroControllerFront {
     // Salvar ou atualizar (processa o formulário para criação ou edição)
     @PostMapping
     public ModelAndView salvarGenero(@ModelAttribute("genero") GeneroDTO genero) {
-        boolean saved = generoService.salvarOuAtualizar(genero);
+        boolean saved;
+        // Se o objeto já tem ID, é edição; caso contrário, é criação.
+        if (genero.getId_genero() != null) {
+            saved = generoService.atualizar(genero);
+        } else {
+            saved = generoService.salvar(genero);
+        }
+
         if (saved) {
             return new ModelAndView("redirect:/genero/list");
         } else {
             ModelAndView mv = new ModelAndView("genero/form2");
             mv.addObject("genero", genero);
             mv.addObject("error", "Não foi possível salvar o gênero.");
+            return mv;
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ModelAndView atualizarGenero(@PathVariable Long id, @ModelAttribute("genero") GeneroDTO genero) {
+        boolean updated = generoService.atualizar(genero);
+        if (updated) {
+            return new ModelAndView("redirect:/genero/list");
+        } else {
+            ModelAndView mv = new ModelAndView("genero/form2");
+            mv.addObject("genero", genero);
+            mv.addObject("error", "Não foi possível atualizar o gênero.");
             return mv;
         }
     }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <!-- <title th:text="${#strings.isEmpty(livro.id_livro) ? 'Novo Livro' : 'Editar Livro'}"></title> -->
-  <title th:text="${livro} != null and ${livro.id_livro} != null  ? 'Editar Livro' : 'Novo Livro'"></title>
+  <title th:text="${view} != null and ${livro.id_livro} != null  ? 'Editar Livro' : 'Novo Livro'"></title>
 
   <link 
     rel="stylesheet" 
@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container mt-4">
-    <h1 th:text="${livro} != null and ${livro.id_livro} != null ? 'Editar' : 'Novo'"></h1>
+    <h1 th:text="${view} != null and ${livro.id_livro} != null ? 'Editar' : 'Novo'"></h1>
 
     <form th:action="@{/livros/}" th:object="${livro}" method="post" class="row g-3">
         <!-- Se já houver um ID, inclui um hidden para manter a informação -->

@@ -10,13 +10,11 @@
     <h1 th:text="${genero.id_genero} != null ? 'Editar Gênero' : 'Novo Gênero'"></h1>
     <form th:action="${genero.id_genero} != null ? @{/genero/{id}(id=${genero.id_genero})} : @{/genero}" 
           method="post" th:object="${genero}">
+         <input type="hidden" name="_method" value="PUT" />
         <!-- Campo oculto para o ID -->
         <input type="hidden" th:field="*{id_genero}" />
         
-        <!-- Se for edição, insere o campo de method override -->
-        <div th:if="${genero.id_genero} != null">
-            <input type="hidden" name="_method" value="PUT"/>
-        </div>
+        
 
         <div class="mb-3">
             <label for="nome_genero" class="form-label">Nome:</label>
@@ -31,7 +29,7 @@
         </div>
         <!-- Exibe o botão Salvar somente se não estiver em modo visualização -->
         <button type="submit" class="btn btn-success" th:if="${!view}">Salvar</button>
-        <a th:href="@{/genero/list}" class="btn btn-secondary">Voltar</a>
+        <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
     </form>
 </div>
 </body>
