@@ -52,7 +52,7 @@ public class GeneroService {
     public boolean atualizar(GeneroDTO generoDTO) {
         return this.webClient
             .method(HttpMethod.PUT)
-            .uri("genero/{id}", generoDTO.getId_genero())
+            .uri("genero", generoDTO.getId_genero())
             .bodyValue(generoDTO)
             .retrieve()
             .toBodilessEntity()
