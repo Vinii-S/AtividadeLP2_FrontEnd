@@ -16,7 +16,7 @@ public class GeneroService {
     @Autowired
     private WebClient webClient;
 
-    // Método existente (listar todos)
+ 
     public List<GeneroDTO> listAllGeneros() {
         Mono<List<GeneroDTO>> listObj = this.webClient
                 .method(HttpMethod.GET)
@@ -27,7 +27,7 @@ public class GeneroService {
         return listObj.block();
     }
 
-    // Método existente (salvar)
+
     public boolean salvar(GeneroDTO generoDTO) {
         Mono<GeneroDTO> obj = this.webClient
                 .method(HttpMethod.POST)
@@ -38,7 +38,6 @@ public class GeneroService {
         return obj.block() != null;
     }
 
-    // Buscar gênero por ID (para edição)
     public GeneroDTO getById(Long id) {
         return this.webClient
                 .method(HttpMethod.GET)
@@ -48,7 +47,7 @@ public class GeneroService {
                 .block();
     }
 
-    // Atualizar gênero (PUT)
+   
     public boolean atualizar(GeneroDTO generoDTO) {
         return this.webClient
                 .method(HttpMethod.PUT) 
@@ -61,7 +60,7 @@ public class GeneroService {
                 .is2xxSuccessful();
     }
 
-    // Excluir gênero (DELETE)
+   
     public boolean delete(Long id) {
         return this.webClient
                 .method(HttpMethod.DELETE)

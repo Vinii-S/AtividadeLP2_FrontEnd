@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
-  <!-- <title th:text="${#strings.isEmpty(livro.id_livro) ? 'Novo Livro' : 'Editar Livro'}"></title> -->
+
   <title th:text="${livro} != null and ${livro.id_livro} != null  ? 'Editar Livro' : 'Novo Livro'"></title>
 
   <link 
@@ -54,7 +54,7 @@
                     th:selected="${livro.generoId} == ${g.id_genero}"
                 ></option>
             </select>
-            <!-- Link para gerenciar gêneros -->
+
         <a th:href="@{/genero/list}" class="btn btn-link">Gerenciar Gêneros</a>
         </div>
 

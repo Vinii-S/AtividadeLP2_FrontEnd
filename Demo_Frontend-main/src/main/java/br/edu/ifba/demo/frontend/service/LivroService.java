@@ -45,7 +45,7 @@ public class LivroService {
         Mono<LivroDTO> obj = this.webClient
             .method(HttpMethod.POST)  
             .uri("livro")
-            // .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+
             .bodyValue(livroDTO)
             .retrieve()
             .bodyToMono(LivroDTO.class);
@@ -60,11 +60,11 @@ public class LivroService {
     public LivroDTO getById(Long id_livro){
         Mono<LivroDTO> monoObj = this.webClient
         .method(HttpMethod.GET)
-        .uri("livro/getById/{id}", id_livro) // Path variable
+        .uri("livro/getById/{id}", id_livro) 
         .retrieve()
-        .bodyToMono(LivroDTO.class); // Retorna um Mono<LivroDTO>
+        .bodyToMono(LivroDTO.class); 
     
-        // Converte a chamada reativa em chamada bloqueante (sincronamente):
+
         LivroDTO livro = monoObj.block();
         return livro;
     }

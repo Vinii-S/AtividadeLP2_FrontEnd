@@ -53,7 +53,7 @@ public class LivroController {
     public ModelAndView novoLivro() {
         ModelAndView mv = new ModelAndView("livros/form");
         mv.addObject("livro", new LivroDTO());
-        mv.addObject("generos", generoService.listAllGeneros()); // Carrega gêneros
+        mv.addObject("generos", generoService.listAllGeneros()); 
         return mv;
     }
 
@@ -72,7 +72,7 @@ public class LivroController {
         LivroDTO livro = livroService.getById(id);
         ModelAndView mv = new ModelAndView("livros/form");
         mv.addObject("livro", livro);
-        mv.addObject("generos", generoService.listAllGeneros()); // Carrega gêneros
+        mv.addObject("generos", generoService.listAllGeneros()); 
         mv.addObject("view", false);
         return mv;
     }
