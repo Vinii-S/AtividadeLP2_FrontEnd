@@ -29,18 +29,17 @@ public class GeneroControllerFront {
     public ModelAndView novoGenero() {
         ModelAndView mv = new ModelAndView("genero/form2");
         mv.addObject("genero", new GeneroDTO());
-        // Para criação, não há necessidade de modo "view"
         mv.addObject("view", false);
         return mv;
     }
 
-    // Exibir detalhes (visualização) de um gênero (modo somente leitura)
+    // Exibir detalhes de um gênero
     @GetMapping("/view/{id}")
     public ModelAndView exibirGenero(@PathVariable Long id) {
         GeneroDTO genero = generoService.getById(id);
         ModelAndView mv = new ModelAndView("genero/form2");
         mv.addObject("genero", genero);
-        mv.addObject("view", true); // Habilita o modo visualização (campos desabilitados no form)
+        mv.addObject("view", true); 
         return mv;
     }
 
@@ -50,7 +49,7 @@ public class GeneroControllerFront {
         GeneroDTO genero = generoService.getById(id);
         ModelAndView mv = new ModelAndView("genero/form2");
         mv.addObject("genero", genero);
-        mv.addObject("view", false); // Modo edição
+        mv.addObject("view", false);
         return mv;
     }
 
@@ -61,11 +60,10 @@ public class GeneroControllerFront {
         return "redirect:/genero/list";
     }
 
-    // Salvar ou atualizar (processa o formulário para criação ou edição)
+    // Salvar ou atualizar
     @PostMapping
     public ModelAndView salvarGenero(@ModelAttribute("genero") GeneroDTO genero) {
         boolean saved;
-        // Se o objeto já tem ID, é edição; caso contrário, é criação.
         if (genero.getId_genero() != null) {
             saved = generoService.atualizar(genero);
         } else {
