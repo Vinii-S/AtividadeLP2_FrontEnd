@@ -1,0 +1,62 @@
+<!--
+    Referencia para o frameword de graficos 
+    https://echarts.apache.org/en/index.html 
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+    <div id="main" style="width: 100%; height:300px;"></div>
+    <div id="main2" style="height:300px;"></div>
+</div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var data = /*[[${data}]]*/ [];
+        var chart = echarts.init(document.getElementById('main'));
+        var option = {
+            title: {
+                text: 'Sample Chart'
+            },
+            tooltip: {},
+            xAxis: {
+                data: ['Banco de Dados', 'Biologia', 'Espanhol', 'Estrutura de Dados','Filosofia','Geografia','Inglês Técnico', 'Manutenção','LP 2', 'Empreendedorismo']
+            },
+            yAxis: {},
+            series: [{
+                name: 'Nota',
+                type: 'line',
+                data: data
+            }]
+        };
+        chart.setOption(option);
+
+
+        var chart2 = echarts.init(document.getElementById('main2'));
+        var option2 = {
+            title: {
+                text: 'Gráfico Barras'
+            },
+            tooltip: {},
+            xAxis: {
+                data: ['Banco de Dados', 'Biologia', 'Espanhol',
+                 'Estrutura de Dados', 'Filosofia','Geografia',
+                'Inglês Técnico', 'Manutenção', 'Linguagem de Programação 2',
+            'Empreendedorismo', 'Produção Textual', 'Redes de Computadores 2',
+        'Segurança', 'Sistemas Operacionais', 'Sociologia do Trabalho']
+            },
+            yAxis: {},
+            series: [{
+                name: 'Values',
+                type: 'bar',
+                data: data
+            }]
+        };
+        chart2.setOption(option2);
+        /*]]>*/
+    </script>
+</body>
+</html>
